@@ -149,12 +149,22 @@ bool OverlayManager::NeedsRepaint() {
     
   return false;
 }
+template<typename T> struct reversion_wrapper {
+    T& iterable;
+};
 
-Overlay* OverlayManager::HitTest(int x, int y) {
-  for (auto& i : overlays_) {
-    if (!i->is_hidden() && x >= i->x() && y >= i->y() && x < i->x() + (int)i->width() && y < i->y() + (int)i->height())
-      return i;
-  }
+template<typename T> auto begin(reversion_wrapper<T> w) { return std::rbegin(w.iterable); }
+
+template<typename T> auto end(reversion_wrapper<T> w) { return std::rend(w.iterable); }
+
+template<typename T> reversion_wrapper<T> reverse(T&& iterable) { return { iterable }; }
+
+Overlay* OverlayManager::HitTest(int x, int y)
+{
+    for (auto& i : reverse(overlays_)) {
+        if (!i->is_hidden() && x >= i->x() && y >= i->y() && x < i->x() + (int)i->width() && y < i->y() + (int)i->height())
+            return i;
+    }
 
   return nullptr;
 }
