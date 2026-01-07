@@ -430,8 +430,7 @@ void GPUDriverD3D11::ClearRenderBuffer(uint32_t render_buffer_id) {
 
   ID3D11RenderTargetView* target = GetRenderTargetView(render_buffer_id);
   if (!target) {
-    MessageBoxW(nullptr, L"GPUDriverD3D11::ClearRenderBuffer, render buffer id doesn't exist.",
-                L"Error", MB_OK);
+    //MessageBoxW(nullptr, L"GPUDriverD3D11::ClearRenderBuffer, render buffer id doesn't exist.", L"Error", MB_OK);
     return;
   }
 

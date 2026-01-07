@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_definitions(-DAPPCORE_IMPLEMENTATION)
-
+set(PORT "UltralightWin")
 # This should be set in platform toolchain.
 if (NOT PORT)
     message(FATAL_ERROR "Unknown PORT '${PORT}'")
