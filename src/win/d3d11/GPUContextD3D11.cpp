@@ -31,6 +31,7 @@ GPUContextD3D11::GPUContextD3D11() {
     // Failed to create D3D11 device, fallback to CPU renderer
     immediate_context_.Reset();
     device_.Reset();
+    return;
   }
 
   // Create Enabled Blend State
