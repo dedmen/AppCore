@@ -112,12 +112,14 @@ void OverlayManager::FireMouseEvent(const ultralight::MouseEvent& evt) {
 
   if (hovered_overlay_) {
     if (evt.type == ultralight::MouseEvent::kType_MouseDown && evt.button == MouseEvent::kButton_Left) {
-      if (focused_overlay_)
+
+      bool focusChange = focused_overlay_ && focused_overlay_ != hovered_overlay_;
+      if (focused_overlay_ && focusChange)
         focused_overlay_->view()->Unfocus();
 
       focused_overlay_ = hovered_overlay_;
 
-      if (window_focused_)
+      if (window_focused_ && focusChange)
         focused_overlay_->view()->Focus();
       is_dragging_ = true;
     }
